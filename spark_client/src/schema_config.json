@@ -1,0 +1,17 @@
+{
+    "table": "customers",
+    "columns": [
+        { "name": "PassengerId", "type": "int" },
+        { "name": "Survived", "type": "int" },
+        { "name": "Pclass", "type": "int" },
+        { "name": "Name", "type": "string" },
+        { "name": "Sex", "type": "string" },
+        { "name": "Age", "type": "float" },
+        { "name": "SibSp", "type": "int" },
+        { "name": "Parch", "type": "int" },
+        { "name": "Ticket", "type": "string" },
+        { "name": "Fare", "type": "float" },
+        { "name": "Cabin", "type": "string" },
+        { "name": "Embarked", "type": "string" }
+    ]
+}
