@@ -12,7 +12,7 @@ I will explore the following contents:
 - The use of Spark Streaming to process and transform real-time data
 - How MinIO provides scalable object storage for processed data
 ## Architecture
-![alt text](img/architecture.png)
+![alt text](img/streaming_data_architecture.png)
 The components in the above architecture include:
 - **PostgreSQL**: Stores relational data and captures changes using CDC.
 - **Debezium**: Listens for database changes, converts them into event streams, and publishes them to Kafka.
@@ -96,3 +96,28 @@ You can use [json.crack](https://jsoncrack.com/editor) to inspect the message va
 - `"r"` → Read (SNAPSHOT - only during snapshot mode)
 
 - `ts_ms` (Timestamp): The epoch timestamp (in milliseconds) representing when the event occurred.
+### 4. Process Data with Spark Streaming & Store in MinIO
+Step 1: Write python script to process data with Spark Streaming and store in MinIO
+The [stream_kafka_to_minio.py](spark_client/src/stream_kafka_to_minio.py) file is used to subscribe to data from a Kafka topic, process it with Spark Streaming, and load it into MinIO in CSV and Parquet formats.
+
+Step 2: Run spark submit command to call this job
+```bash
+spark-submit --master local --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.4.1,io.delta:delta-core_2.12:2.4.0 stream_kafka_to_minio.py
+```
+## **Conclusion**
+
+This architecture provides a **real-time, scalable data pipeline** that ensures efficient **data ingestion, processing, and storage**.
+
+✔ **Debezium & Kafka** capture database changes in real-time  
+✔ **Spark Streaming** processes and transforms data dynamically  
+✔ **MinIO** serves as a **Data Lake**, storing raw and processed data  
+
+### **When to Use?**  
+✅ **Real-time analytics & monitoring** (e.g., industrial IoT, financial transactions)  
+✅ **Event-driven architectures** requiring instant data updates  
+✅ **Big data processing & machine learning pipelines**  
+
+This setup is ideal for organizations needing **low-latency, high-throughput data processing** while ensuring **scalability and cost-efficiency**. 💪
+
+
+
